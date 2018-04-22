@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">图书管理系统</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="query.html">图书查询</a></li>
+                <li><a href=" import.html">图书入库</a></li>
+                <li><a href="checkout.html">借书</a></li>
+                <li><a href="return.html">还书</a></li>
+                <li><a href="#">借书证管理</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id='bq'>
+    <h1 class="row col-sm-offset-1">图书查询</h1>
+    <form class="query col-sm-offset-1 row" role="form" style="margin: 10px;">
+        <div class="form-group col-sm-4">
+            <label for="bno" class="control-label">书号</label>
+            <input type="text" name="bno" id="bno" class="form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="category">类别</label>
+            <input type="text" name="category" id="category" class="form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="title">书名</label>
+            <input type="text" name="title" id="title" class="form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="press">出版社</label>
+            <input type="text" name="press" id="press" class="form-control">
+        </div>
+        <div class="form-group col-sm-2">
+            <label>最小年份</label>
+            <input type="text" name="year_begin" class="range_begin form-control">
+        </div>
+        <div class="form-group col-sm-2">
+            <label>最大年份</label>
+            <input type="text" name="year_end" class="range_end form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label>作者</label>
+            <input type="text" name="author" class="form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label>最低价格</label>
+            <input type="text" name="price_begin" class="form-control">
+        </div>
+        <div class="form-group col-sm-4">
+            <label>最高价格</label>
+            <input type="text" name="price_end" class="form-control">
+        </div>
+        <!--<button id="bQuery">查询图书</button>-->
+    </form>
+    <button id="bQuery" class=" row col-sm-offset-1 btn btn-info col-sm-2">查询图书</button>
+</div>
+
+<div id="queryRe" style="padding: 50px;"></div>
+
+</div>
+<div>
+    <h1>图书入库</h1>
+</div>
+<div>
+    <h1>借书</h1>
+    <form class="check_out">
+        借书证号<input type="text">
+        书号<input type="text">
+    </form>
+    <button>借书</button>
+</div>
+<div>
+    <h1>还书</h1>
+    <form class="return">
+        借书证号<input type="text">
+        书号<input type="text">
+
+    </form>
+    <button type="submit">还书</button>
+</div>
+<div>
+    <h1>借书证管理</h1>
+    <form>
+        查找借书证<input type="text">
+
+    </form>
+    <button type="submit">删除</button>
+    <button type="submit">新建借书证</button>
+</div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.range_begin').change(function () {
+            if (!this.empty()) {
+                $('.range_end').attr('required', 'required');
+            }
+        });
+        $('#bQuery').click(function (e) {
+            $.ajax({
+                url: "app/query.php",
+                data: ($('form.query').serialize()),
+                success: function (s, status) {
+                    //alert("Data: " + data +"\nStatus: " + status);
+                    $('#queryRe').html(s);
+                }
+            });
+        });
+    });
+
+</script>
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 可选的Bootstrap主题文件（一般不使用） -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
