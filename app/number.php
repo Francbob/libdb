@@ -27,6 +27,7 @@ echo "<table border='1' class='table'>
 
 $myfile = fopen("../upload/books.txt","r") or die("Unable to open file!");
 // 输出单行直到 end-of-file
+error_reporting(E_ALL ^ E_NOTICE);
 while(!feof($myfile)) {
     $book_info = fgets($myfile);
     $get = new SplFixedArray(7);

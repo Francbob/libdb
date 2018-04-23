@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation" id="function">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">图书管理系统</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="query.html">图书查询</a></li>
+                <li><a href="checkout.html">借书</a></li>
+                <li><a href="return.html">还书</a></li>
+                <li class="root-mag"><a href="import.html">图书入库</a></li>
+                <li class="root-mag"><a href="users.html">借书证管理</a></li>
+                <li><a href="index.html" id="log-out">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="log-result" style="padding: 50px;"></div>
+
+<div class="container" id="log-in-container">
+    <h1 class="row col-sm-offset-2">登陆</h1>
+    <form class="log-in col-sm-offset-1 row" role="form" style="margin: 50px;">
+        <div class="form-group col-sm-7">
+            <label for="name" class="control-label">姓名</label>
+            <input type="text" required="required" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group col-sm-7">
+            <label for="password">密码</label>
+            <input type="password" required="required" name="password" id="password" class="form-control">
+        </div>
+        <!--<button id="bQuery">查询图书</button>-->
+    </form>
+    <button id="log-in" class="row col-sm-offset-1 btn btn-info col-sm-2">登陆</button>
+</div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#function').hide();
+        $('#log-in').click(function () {
+            $.ajax({
+                url: "app/login.php",
+                type: "POST",
+                data: ($('form.log-in').serialize()),
+                error: function (e) {
+                    alert(e);
+                },
+                success: function (data, status) {
+                    //alert("jo");
+                    if (data === 'root') {
+                        $('#function').show();
+                        $('#log-result').html("<h1>欢迎管理员！</h1>");
+                        $('#log-in-container').hide();
+
+                    } else if (data === 'student') {
+                        $('#log-result').html("<h1>欢迎进入图书管理系统！</h1>");
+                        $('#function').show();
+                        $('#log-in-container').hide();
+
+                    } else {
+                        $('#log-result').html(data);
+                        $('#log-in-container').hide();
+                    }
+                }
+            })
+        })
+    })
+</script>
+
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 可选的Bootstrap主题文件（一般不使用） -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

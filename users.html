@@ -18,6 +18,7 @@
                 <li><a href="checkout.html">借书</a></li>
                 <li><a href="return.html">还书</a></li>
                 <li class="active"><a href="users.html">借书证管理</a></li>
+                <li><a href="index.html" id="log-out">退出</a></li>
             </ul>
         </div>
     </div>
@@ -69,6 +70,19 @@
 </div>
 <div id="search-result" style="padding: 50px;"></div>
 
+<div class="container">
+    <h1 class="row col-sm-offset-1">删除用户</h1>
+    <form class="delete col-sm-offset-1 row" role="form" style="margin: 10px;">
+        <div class="form-group col-sm-8">
+            <label for="d-cno" class="control-label">卡号(7位阿拉伯数字)</label>
+            <input type="text" required="required" name="d-cno" id="d-cno" class="form-control">
+        </div>
+        <!--<button id="bQuery">查询图书</button>-->
+    </form>
+    <button id="delete" class="row col-sm-offset-1 btn btn-info col-sm-2">删除</button>
+</div>
+<div id="delete-result" style="padding: 50px;"></div>
+
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <script>
@@ -88,6 +102,16 @@
                 data: ($('form.signup').serialize()),
                 success: function (data, status) {
                     $('#signup-result').html(data);
+                }
+            })
+        });
+        $('#delete').click(function () {
+            $.ajax({
+                url: "app/delete.php",
+                data: ($('form.delete').serialize()),
+                success: function (data, status) {
+                    $('#delete-result').html(data);
+
                 }
             })
         })
