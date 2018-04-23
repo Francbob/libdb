@@ -50,15 +50,17 @@ $result = mysqli_query($con,$sql);
 
 echo "<table border='1' class='table'>
 <tr>
-<th>bno</th>
-<th>category</th>
-<th>title</th>
-<th>press</th>
-<th>year</th>
-<th>author</th>
-<th>price</th>
+<th>书号</th>
+<th>类别</th>
+<th>书名</th>
+<th>出版社</th>
+<th>出版年份</th>
+<th>作者</th>
+<th>价格</th>
+<th>总量</th>
+<th>库存</th>
 </tr>";
-
+//
 while ($row = mysqli_fetch_array($result)){
     echo "<tr>";
     echo "<td>" . $row['bno'] . "</td>";
@@ -68,9 +70,12 @@ while ($row = mysqli_fetch_array($result)){
     echo "<td>" . $row['year'] . "</td>";
     echo "<td>" . $row['author'] . "</td>";
     echo "<td>" . $row['price'] . "</td>";
+    echo "<td>" . $row['total'] . "</td>";
+    echo "<td>" . $row['stock'] . "</td>";
     echo "</tr>";
 }
 echo "</table>";
+
 
 //mysqli_close($con);
 ?>

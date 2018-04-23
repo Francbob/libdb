@@ -988,14 +988,16 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="232" name="borrow_date">
+    <column id="246" parent="232" name="borrow_data">
       <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="232" name="return_date">
+    <column id="247" parent="232" name="return_data">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="248" parent="232" name="bno">

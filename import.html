@@ -17,7 +17,7 @@
                 <li class="active"><a href="import.html">图书入库</a></li>
                 <li><a href="checkout.html">借书</a></li>
                 <li><a href="return.html">还书</a></li>
-                <li><a href="#">借书证管理</a></li>
+                <li><a href="users.html">借书证管理</a></li>
             </ul>
         </div>
     </div>
@@ -61,13 +61,17 @@
 
 <div class="container">
     <h1 class="row col-sm-offset-1">批量入库</h1>
-    <form class="query col-sm-offset-1 row" role="form" style="margin: 10px;">
-
+    <form class="num-import col-sm-offset-1 row" role="form" style="margin: 10px;">
+        <div class="form-group">
+        <label for="file">文件名：</label>
+        <input type="file" name="file" id="file">
+        </div>
         <!--<button id="bQuery">查询图书</button>-->
     </form>
     <button id="nums-import" class="row col-sm-offset-1 btn btn-info col-sm-2">批量入库</button>
 </div>
 <div id="import-result" style="padding: 50px;"></div>
+<div id="num-result" style="padding: 50px;"></div>
 
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
@@ -79,6 +83,15 @@ $(document).ready(function () {
             data: ($('form.insert').serialize()),
             success: function (data, status) {
                 $('#import-result').html(data);
+            }
+        })
+    })
+    $('#nums-import').click(function () {
+        $.ajax({
+            url:"app/number.php",
+            data: ($('form.num-import').serialize()),
+            success: function (data, status) {
+                $('#num-result').html(data);
             }
         })
     })

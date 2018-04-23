@@ -27,49 +27,67 @@
     <h1 class="row col-sm-offset-1">新建借书证</h1>
     <form class="signup col-sm-offset-1 row" role="form" style="margin: 10px;">
         <div class="form-group col-sm-8">
-            <label for="cno" class="control-label">卡号</label>
-            <input type="text" required="required" name="cno" id="cno" class="form-control">
+            <label for="new-cno" class="control-label">卡号(7位阿拉伯数字)</label>
+            <input type="text" required="required" name="new-cno" id="new-cno" class="form-control">
         </div>
         <div class="form-group col-sm-8">
             <label for="name">姓名</label>
             <input type="text" required="required" name="name" id="name" class="form-control">
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-8">
             <label for="department">所在系</label>
             <input type="text" required="required" name="department" id="department" class="form-control">
         </div>
-        <div class="form-group col-sm-3">
-            <label for="press">身份</label>
-            <input type="text" required="required" name="press" id="press" class="form-control">
+
+        <div class="form-group col-sm-6">
+            <label>身份</label>
+            <div>
+                <label class="radio-inline">
+                    <input name="s-type" type="radio" value="S" checked>学生
+                </label>
+                <label class="radio-inline">
+                    <input name="s-type" type="radio" value="T">教师
+                </label>
+            </div>
         </div>
         <!--<button id="bQuery">查询图书</button>-->
     </form>
     <button id="signup" class="row col-sm-offset-1 btn btn-info col-sm-2">注册</button>
 </div>
+<div id="signup-result" style="padding: 50px;"></div>
 
 <div class="container">
     <h1 class="row col-sm-offset-1">查找用户</h1>
     <form class="search col-sm-offset-1 row" role="form" style="margin: 10px;">
         <div class="form-group col-sm-8">
-            <label for="cno" class="control-label">卡号</label>
+            <label for="cno" class="control-label">卡号(7位阿拉伯数字)</label>
             <input type="text" required="required" name="cno" id="cno" class="form-control">
         </div>
         <!--<button id="bQuery">查询图书</button>-->
     </form>
-    <button id="search" class="row col-sm-offset-1 btn btn-info col-sm-2">批量入库</button>
+    <button id="search" class="row col-sm-offset-1 btn btn-info col-sm-2">查找</button>
 </div>
-<div id="import-result" style="padding: 50px;"></div>
+<div id="search-result" style="padding: 50px;"></div>
 
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        $('#one-import').click(function () {
+        $('#search').click(function () {
             $.ajax({
-                url:"app/import.php",
-                data: ($('form.insert').serialize()),
+                url: "app/search.php",
+                data: ($('form.search').serialize()),
                 success: function (data, status) {
-                    $('#import-result').html(data);
+                    $('#search-result').html(data);
+                }
+            })
+        });
+        $('#signup').click(function () {
+            $.ajax({
+                url: "app/signup.php",
+                data: ($('form.signup').serialize()),
+                success: function (data, status) {
+                    $('#signup-result').html(data);
                 }
             })
         })
